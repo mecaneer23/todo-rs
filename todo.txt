@@ -1,0 +1,6 @@
+- dummy text
+- another item
+- another todo
+  - an indented todo
+a note
+  an indented note
