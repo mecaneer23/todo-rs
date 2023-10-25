@@ -4,6 +4,8 @@ use std::io::Read;
 
 mod class_todo;
 use self::class_todo::Todo;
+mod class_cursor;
+use self::class_cursor::Cursor;
 
 const FILENAME: &str = "todo.txt";
 
@@ -40,5 +42,8 @@ fn init() {}
 fn main() {
     init();
     let mut todos = validate_file(read_file(FILENAME));
-    println!("{:#?}", todos);
+    let mut selected: Cursor = Cursor::new(0);
+    for i in 0..todos.len() {
+        println!("{}", todos[i]);
+    }
 }

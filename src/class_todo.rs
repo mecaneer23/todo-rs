@@ -1,3 +1,5 @@
+use std::fmt;
+
 #[derive(Debug)]
 pub struct Todo {
     pub text: String,
@@ -61,5 +63,48 @@ impl Todo {
             color,
             indent_level,
         }
+    }
+
+    pub fn get_idx(&self, key: i32) -> String {
+        self.text.chars().nth(key as usize).unwrap().to_string()
+    }
+
+    pub fn get_len(&self) -> usize {
+        self.display_text.len()
+    }
+
+    pub fn set_display_text(&mut self, display_text: &str) {
+        self.display_text = display_text.to_string();
+        self.text = self.to_string();
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.display_text == ""
+    }
+
+}
+
+impl fmt::Display for Todo {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", [
+            (true, " ".repeat(self.indent_level)),
+            (
+                self.box_char.is_some() && !self.is_empty(),
+                match self.box_char {
+                    Some(chr) => chr.to_string(),
+                    None => String::from(""),
+                },
+            ),
+            (self.color != 7, self.color.to_string()),
+            (
+                (self.box_char.is_some() && !self.is_empty()) || self.color != 7,
+                String::from(" "),
+            ),
+            (true, self.display_text.clone()),
+        ]
+        .iter()
+        .filter(|&&(condition, _)| condition)
+        .map(|(_, item)| item)
+        .fold(String::new(), |acc, item| acc + item))
     }
 }
