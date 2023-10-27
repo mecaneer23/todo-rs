@@ -1,6 +1,6 @@
 use std::fs::File;
-use std::path::Path;
 use std::io::Read;
+use std::path::Path;
 
 mod class_todo;
 use self::class_todo::Todo;
@@ -32,9 +32,13 @@ fn validate_file(raw_data: String) -> Vec<Todo> {
     }
     let mut usable_data: Vec<Todo> = Vec::new();
     for line in raw_data.split("\n") {
-        usable_data.push(if line.len() == 0 {Todo::new("")} else {Todo::new(&line)});
+        usable_data.push(if line.len() == 0 {
+            Todo::new("")
+        } else {
+            Todo::new(&line)
+        });
     }
-    return usable_data
+    return usable_data;
 }
 
 fn init() {}
@@ -42,7 +46,7 @@ fn init() {}
 fn main() {
     init();
     let mut todos = validate_file(read_file(FILENAME));
-    let mut selected: Cursor = Cursor::new(0);
+    let mut selected: Cursor = Cursor::new(vec![0]);
     for i in 0..todos.len() {
         println!("{}", todos[i]);
     }
