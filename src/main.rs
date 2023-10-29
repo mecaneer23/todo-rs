@@ -6,6 +6,8 @@ mod class_todo;
 use self::class_todo::Todo;
 mod class_cursor;
 use self::class_cursor::Cursor;
+mod class_mode;
+use self::class_mode::Mode;
 
 const FILENAME: &str = "todo.txt";
 
