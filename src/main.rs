@@ -8,6 +8,8 @@ mod class_cursor;
 use self::class_cursor::Cursor;
 mod class_mode;
 use self::class_mode::Mode;
+mod class_history;
+use self::class_history::UndoRedo;
 
 const FILENAME: &str = "todo.txt";
 
